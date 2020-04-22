@@ -1,10 +1,12 @@
 load('api_zswitch.js');
 
-ZenSwitch._proto.GPIO = {
+ZenSwitch.GPIO = {
   _att: ffi('bool mgos_zswitch_gpio_attach(void *, int, void *)'),
   _det: ffi('void mgos_zswitch_gpio_detach(void *)'),
   _cfgc: ffi('void *mjs_zswitch_gpio_cfg_create(bool)'),
+};
 
+ZenSwitch._proto.GPIO = {
   _switch: null,
   _getHandle: function() {
     return this._switch.handle
@@ -21,12 +23,12 @@ ZenSwitch._proto.GPIO = {
   // }
   // ```
 	attach: function(pin, cfg) {
-    if (!cfg) cfg = {};
     let cfgo = null;
     if (cfg) {
-      cfgo = this._cfgc(((cfg.activeHigh === undefined || cfg.activeHigh === null) ? true : cfg.activeHigh));
+      cfgo = ZenSwitch.GPIO._cfgc(((cfg.activeHigh === undefined ||
+        cfg.activeHigh === null) ? true : cfg.activeHigh));
     }
-    let result = this._att(this._getHandle(), pin, cfgo);
+    let result = ZenSwitch.GPIO._att(this._getHandle(), pin, cfgo);
     ZenThing._free(cfgo);
     return result;
   },
@@ -38,10 +40,10 @@ ZenSwitch._proto.GPIO = {
   // sw.GPIO.detach();
   // ```
   detach: function() {
-    this._det(this._getHandle());
+    ZenSwitch.GPIO._det(this._getHandle());
   },
 };
 
-ZenSwitch._proto._onCreateSub(function(obj){
+ZenSwitch._onCreateSub(function(obj){
 	obj.GPIO._switch = obj; 
 });
