@@ -22,7 +22,10 @@ ZenSwitch._proto.GPIO = {
   // ```
 	attach: function(pin, cfg) {
     if (!cfg) cfg = {};
-    let cfgo = this._cfgc(((cfg.activeHigh === undefined || cfg.activeHigh === null) ? true : cfg.activeHigh));
+    let cfgo = null;
+    if (cfg) {
+      cfgo = this._cfgc(((cfg.activeHigh === undefined || cfg.activeHigh === null) ? true : cfg.activeHigh));
+    }
     let result = this._att(this._getHandle(), pin, cfgo);
     ZenThing._free(cfgo);
     return result;
