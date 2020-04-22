@@ -1,4 +1,4 @@
-load('api_zthing.js');
+load('api_zswitch.js');
 
 ZenSwitch._proto.GPIO = {
   _att: ffi('bool mgos_zswitch_gpio_attach(void *, int, void *)'),
@@ -7,7 +7,7 @@ ZenSwitch._proto.GPIO = {
 
   _switch: null,
   _getHandle: function() {
-    this._switch.handle
+    return this._switch.handle
   },
 
   // ## **`object.GPIO.attach(pin, cfg)`**
@@ -22,8 +22,8 @@ ZenSwitch._proto.GPIO = {
   // ```
 	attach: function(pin, cfg) {
     if (!cfg) cfg = {};
-    let cfgo = this._cfgc(cfg.activeHigh || true);
-    let result = this._det(this._getHandle(), pin, cfgo);
+    let cfgo = this._cfgc(((cfg.activeHigh === undefined || cfg.activeHigh === null) ? true : cfg.activeHigh));
+    let result = this._att(this._getHandle(), pin, cfgo);
     ZenThing._free(cfgo);
     return result;
   },
