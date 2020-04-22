@@ -84,7 +84,7 @@ bool mgos_zswitch_gpio_attach(struct mgos_zswitch *handle, int pin,
     sizeof(struct mg_zswitch_gpio_entry));
   if (e != NULL) {
     e->handle = handle;
-    e->cfg.active_high = (cfg == NULL ? true ? cfg->active_high);
+    e->cfg.active_high = (cfg == NULL ? true : cfg->active_high);
     e->pin = pin;
     
     if (mg_zswitch_gpio_entry_set(e)) {
