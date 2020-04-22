@@ -49,7 +49,7 @@ bool mg_zswitch_gpio_state_cb(enum mgos_zthing_state_act act,
   return false;
 }
 
-struct mg_zswitch_gpio_entry *mgos_zswitch_gpio_entry_get(struct mgos_zswitch *handle) {
+struct mg_zswitch_gpio_entry *mg_zswitch_gpio_entry_get(struct mgos_zswitch *handle) {
   struct mg_zswitch_gpio_entry *e;
   SLIST_FOREACH(e, &s_context->entries, entry) {
     if (((void *)e->handle) == ((void *)handle)) return e;
@@ -99,7 +99,7 @@ bool mgos_zswitch_gpio_attach(struct mgos_zswitch *handle, int pin,
 }
 
 void mgos_zswitch_gpio_detach(struct mgos_zswitch *handle) {
-  struct mg_zswitch_gpio_entry *e = mgos_zswitch_gpio_entry_get(handle);
+  struct mg_zswitch_gpio_entry *e = mg_zswitch_gpio_entry_get(handle);
   if (e != NULL) {
     mg_zswitch_gpio_entry_reset(e);
     SLIST_REMOVE(&s_context->entries, e, mg_zswitch_gpio_entry, entry);
