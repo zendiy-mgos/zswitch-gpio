@@ -9,7 +9,8 @@ ZenSwitch.GPIO = {
 ZenSwitch._proto.GPIO = {
   _switch: null,
   _getHandle: function() {
-    return this._switch.handle
+    print('Handle', this._switch.handle, 'for', this._switch.id);
+    return this._switch.handle;
   },
 
   // ## **`object.GPIO.attach(pin, cfg)`**
@@ -45,5 +46,5 @@ ZenSwitch._proto.GPIO = {
 };
 
 ZenSwitch._proto._onCreateSub(function(obj){
-	obj.GPIO._switch = obj; 
+  obj.GPIO._switch = obj; 
 });
