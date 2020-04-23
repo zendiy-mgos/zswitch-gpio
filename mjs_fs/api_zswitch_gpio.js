@@ -44,6 +44,6 @@ ZenSwitch._proto.GPIO = {
   },
 };
 
-ZenSwitch._onCreateSub(function(obj){
+ZenSwitch._proto._onCreateSub(function(obj){
 	obj.GPIO._switch = obj; 
 });
