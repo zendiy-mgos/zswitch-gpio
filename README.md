@@ -28,7 +28,7 @@ GPIO configuration settings for `mgos_zswitch_gpio_attach()`.
 
 |Field||
 |--|--|
-|active_high|`true` if switch is ON when GPIO output is high (1)|
+|active_high|`true` if switch is ON when GPIO output is high (1).|
 ### mgos_zswitch_gpio_attach()
 ```c
 bool mgos_zswitch_gpio_attach(struct mgos_zswitch *handle, int pin, struct mgos_zswitch_gpio_cfg *cfg);
@@ -52,6 +52,10 @@ mgos_zswitch_gpio_attach(sw, 5, NULL);
 void mgos_zswitch_gpio_detach(struct mgos_zswitch *handle);
 ```
 Detach the switch from the GPIO that was previously attached using `mgos_zswitch_gpio_attach()`.
+
+|Parameter||
+|--|--|
+|handle|Switch handle.|
 ## JS API Reference
 ### .GPIO.attach()
 ```js
