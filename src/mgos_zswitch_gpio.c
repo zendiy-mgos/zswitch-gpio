@@ -57,8 +57,9 @@ struct mg_zswitch_gpio_entry *mg_zswitch_gpio_entry_get(struct mgos_zswitch *han
   return NULL;
 }
 
-void mg_zswitch_gpio_entry_reset(struct mg_zswitch_gpio_entry *entry) {
+bool mg_zswitch_gpio_entry_reset(struct mg_zswitch_gpio_entry *entry) {
   mgos_zswitch_state_handler_reset(entry->handle);
+  return true;
 }
 
 bool mg_zswitch_gpio_entry_set(struct mg_zswitch_gpio_entry *entry) {
@@ -98,13 +99,14 @@ bool mgos_zswitch_gpio_attach(struct mgos_zswitch *handle, int pin,
   return (e != NULL);
 }
 
-void mgos_zswitch_gpio_detach(struct mgos_zswitch *handle) {
+bool mgos_zswitch_gpio_detach(struct mgos_zswitch *handle) {
   struct mg_zswitch_gpio_entry *e = mg_zswitch_gpio_entry_get(handle);
-  if (e != NULL) {
-    mg_zswitch_gpio_entry_reset(e);
+  if ((e != NULL) && mg_zswitch_gpio_entry_reset(e)) {
     SLIST_REMOVE(&s_context->entries, e, mg_zswitch_gpio_entry, entry);
     free(e);
+    return true;
   }
+  return false;
 }
 
 #ifdef MGOS_HAVE_MJS

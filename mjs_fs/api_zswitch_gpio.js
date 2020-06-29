@@ -2,7 +2,7 @@ load('api_zswitch.js');
 
 ZenSwitch.GPIO = {
   _att: ffi('bool mgos_zswitch_gpio_attach(void *, int, void *)'),
-  _det: ffi('void mgos_zswitch_gpio_detach(void *)'),
+  _det: ffi('bool mgos_zswitch_gpio_detach(void *)'),
   _cfgc: ffi('void *mjs_zswitch_gpio_cfg_create(bool)'),
   
   _proto: {
@@ -39,7 +39,7 @@ ZenSwitch.GPIO = {
     // sw.GPIO.detach();
     // ```
     detach: function() {
-      ZenSwitch.GPIO._det(this._getHandle());
+      return ZenSwitch.GPIO._det(this._getHandle());
     },
   }
 };

@@ -34,7 +34,7 @@ struct mgos_zswitch_gpio_cfg {
 bool mgos_zswitch_gpio_attach(struct mgos_zswitch *handle, int pin,
                               struct mgos_zswitch_gpio_cfg *cfg);
 
-void mgos_zswitch_gpio_detach(struct mgos_zswitch *handle);
+bool mgos_zswitch_gpio_detach(struct mgos_zswitch *handle);
 
 #ifdef __cplusplus
 }
