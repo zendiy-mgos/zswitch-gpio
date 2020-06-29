@@ -49,9 +49,9 @@ mgos_zswitch_gpio_attach(sw, 5, NULL);
 ```
 ### mgos_zswitch_gpio_detach()
 ```c
-void mgos_zswitch_gpio_detach(struct mgos_zswitch *handle);
+bool mgos_zswitch_gpio_detach(struct mgos_zswitch *handle);
 ```
-Detach the switch from the GPIO that was previously attached using `mgos_zswitch_gpio_attach()`.
+Detach the switch from the GPIO that was previously attached using `mgos_zswitch_gpio_attach()`. Returns `true` on success, `false` otherwise.
 
 |Parameter||
 |--|--|
@@ -80,9 +80,9 @@ let success = sw.GPIO.attach(5, {activeHigh: true});
 ```
 ### .GPIO.detach()
 ```js
-sw.GPIO.detach();
+let success = sw.GPIO.detach();
 ```
-Detach the switch from the GPIO that was previously attached using `.GPIO.attach()`.
+Detach the switch from the GPIO that was previously attached using `.GPIO.attach()`. Returns `true` on success, `false` otherwise.
 ## Additional resources
 Take a look to some other demo samples.
 
